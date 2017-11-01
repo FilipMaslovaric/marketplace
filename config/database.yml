@@ -28,4 +28,4 @@ production:
   <<: *default
   database: dmp_production
   username: dmp
-  password: <%= ENV['UAC_DATABASE_PASSWORD'] %>
+  password: <%= ENV['DMP_DATABASE_PASSWORD'] %>
