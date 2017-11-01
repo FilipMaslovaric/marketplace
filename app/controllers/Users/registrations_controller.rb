@@ -10,7 +10,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    @shop = Shop.create({name: params[:user][:name], user_id: current_user.id, about: "<h1>About</h1><p>Formula one grand prix the saints, flemington racecourse kath and kim prahran hipsters purple emerald the hawks, spiegeltent spring racing carnival chopper read etihad stadium north melbourne shinboners, the rebels chaddie emerald peacock victory vs heart a macaron connoisseur, lions bar brunswick and brunswick st brunswick st hippy.</p><p>Spencer st station victory vs heart, black is alway in fashion north of the river running the tan collingwood ferals kylie minogue, purple emerald dumplings cumulus inc formula one grand prix north melbourne shinboners, fairy penguins chaddie MSAC movida cookie, richmond tigers south of the river world's most liveable city.</p><p>Flemington racecourse bourke st mall, pellegrini's collingwood ferals frankston bogans warehouse chic rooftop cinema, essendon bombers ticket inspector world's most liveable city hipsters south of the river, richmond tigers the storm the city loop cate blanchette laksa king, avalon is so not melb tullamarine footscray hobos.</p>", logo: 0, background_image: 0})
   end
 
   # GET /resource/edit
@@ -37,7 +36,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
@@ -50,12 +49,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # The path used after sign up.
-  # def after_sign_up_path_for(user)
-
-  #   puts "!!!!!!!"
-  #   puts @shop.inspect
-  #   shop_path(user.shop.id)
-  # end
+  def after_sign_up_path_for(user)
+    Shop.create({name: params[:user][:name], user_id: current_user.id, about: "<h1>About</h1><p>Formula one grand prix the saints, flemington racecourse kath and kim prahran hipsters purple emerald the hawks, spiegeltent spring racing carnival chopper read etihad stadium north melbourne shinboners, the rebels chaddie emerald peacock victory vs heart a macaron connoisseur, lions bar brunswick and brunswick st brunswick st hippy.</p><p>Spencer st station victory vs heart, black is alway in fashion north of the river running the tan collingwood ferals kylie minogue, purple emerald dumplings cumulus inc formula one grand prix north melbourne shinboners, fairy penguins chaddie MSAC movida cookie, richmond tigers south of the river world's most liveable city.</p><p>Flemington racecourse bourke st mall, pellegrini's collingwood ferals frankston bogans warehouse chic rooftop cinema, essendon bombers ticket inspector world's most liveable city hipsters south of the river, richmond tigers the storm the city loop cate blanchette laksa king, avalon is so not melb tullamarine footscray hobos.</p>", logo: 0, background_image: 0})
+  end
 
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)
