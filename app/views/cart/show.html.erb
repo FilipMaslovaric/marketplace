@@ -1,0 +1,39 @@
+<h1>Cart</h1>
+
+<%= form_with url: '/cart/create' do %>
+  <article>
+    <% if flash[:error].present? %>
+      <div id="error_explanation">
+        <p><%= flash[:error] %></p>
+      </div>
+    <% end %>
+    <label class="amount">
+      <span>Amount: <%= number_to_currency(@total.to_d / 100) %></span>
+    </label>
+  </article>
+
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-description="A month's subscription"
+          data-amount="<%= @total %>"
+          data-locale="auto"></script>
+<% end %>
+
+<div class="row">
+	<% @cart.each do |cart_item| %>
+		<div class="col-lg-6 buffer">
+        	<div class="col-lg-6">
+				<% if cart_item[:product].image == 0 %>
+			    	<%= image_tag cart_item[:product].image = root_path << "placeholder_images/pillow.jpg", class: "img-responsive" %>
+			    <% else %>
+			    	<%= image_tag cart_item[:product].image = Media.find(cart_item[:product].image).file_name.url, class: "img-responsive" %>
+			    <% end %>
+			</div>
+			<div class="col-lg-6">
+				<%= cart_item[:product].name %> <br>
+				<%= number_to_currency(cart_item[:product].price.to_d / 100) %> <br>
+				QTY: <%= cart_item[:quantity] %> <br>
+			</div>
+		</div>
+	<% end %>
+</div>

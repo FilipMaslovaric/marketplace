@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+<div class="container">
+  <div id="product-image-dropzone" class="col-lg-6">
+    <%= image_tag @image, class: "img-responsive" %>
+  </div>
+  
+  <div class="col-lg-6">
+
+    <strong><%= @product.name %></strong> <br>
+
+    <strong>Description:</strong>
+    <%= @product.description.html_safe %> <br>
+
+    <strong>Price:</strong>
+    $<%= @product.price.to_d / 100 %> <br>
+
+    <strong>Item In Stock:</strong>
+    <%= @product.sold %> <br>
+
+    <strong>Seller:</strong>
+    <%= @product.shop.name %> <br>
+
+    <strong>Category:</strong>
+    <%= @product.category.name %> <br>
+    
+
+    <%= form_with url: '/cart/add' do |form| %>
+      <%= form.hidden_field(:product_id, value: @product.id) %>
+      <%= form.select :quantity, options_for_select(@quantity), { prompt: "Select Quantity"} %>
+      <%= form.submit 'Add To Cart' %>
+    <% end %>
+
+  </div>
+
+</div>
+
+<%= link_to 'Edit', edit_product_path(@product) %> |
+<%= link_to 'Back', products_path %>

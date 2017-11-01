@@ -1,0 +1,35 @@
+// Place all the styles related to the Shops controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.navbar-buffer {
+	height: 47px;
+}
+
+.image-div {
+	background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+	margin-right: 200px;
+	max-height: 300px;
+}
+
+.business-name {
+	background-color: rgba(255, 255, 255, .6);
+	border-radius: 10px;
+	margin-left: 200px;
+	padding: 10px 50px 10px 50px;
+}
+
+.buffer {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}

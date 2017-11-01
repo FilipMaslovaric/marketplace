@@ -1,0 +1,34 @@
+<div id="background-dropzone" class="image-div" style="background-image: url(<%= image_path @background %>); ">
+  <h1 class="business-name" ><%= @shop.name %></h1>
+  <div id="logo-dropzone">
+    <%= image_tag @logo, class: "logo img-responsive" %>
+  </div>
+</div>
+
+<div class="container">
+  <div class="editable buffer">
+    <%= @shop.about.html_safe %>
+  </div>
+  <button id="save">Save</button>
+  <%= link_to 'New Product', new_product_path, class: "btn btn-secondary" %>
+
+  <div class="row">
+    <% @products.each do |product| %>
+      <div class="col-lg-6 buffer">
+        <div class="col-lg-6">
+          <%= link_to (image_tag @image, class: "img-responsive"), product %>
+        </div>
+        <div class="col-lg-6">
+          <strong><%= product.name %></strong> <br>
+          <%= product.description.html_safe %> <br>
+          <%= number_to_currency(product.price.to_d / 100) %> <br>
+          <%= product.category.name %> <br>
+          <%= product.sold %> <br>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%= link_to 'Edit', edit_shop_path(@shop) %> |
+  <%= link_to 'Back', shops_path %>
+</div>

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Orders</h1>
+
+    <% @orders.each do |order| %>
+      <% order.products.each do |product| %>
+        <%= product.name %>
+      <% end %> 
+      <% order.order_products.each do |order_product| %>
+        <%= order_product.quantity %>
+      <% end %>
+      <%= link_to 'Show', order %>
+      <%= link_to 'Edit', edit_order_path(order) %>
+      <%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+
+<br>
+
+<%= link_to 'New Order', new_order_path %>
