@@ -11,6 +11,10 @@ Rails.application.routes.draw do
 
   post 'cart/create'
 
+  get 'main/home'
+
+  delete '/cart', to: 'cart#destroy', as: :cart_remove
+
   resources :products
   resources :shops
   resources :media_contents, only: [:create]

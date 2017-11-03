@@ -21,7 +21,7 @@
       <tr>
         <td><%= product.name %></td>
         <td><%= product.description %></td>
-        <td><%= product.price %></td>
+        <td><%= number_to_currency(product.price.to_d / 100) %></td>
         <td><%= product.image %></td>
         <td><%= product.sold %></td>
         <td><%= product.shop.id %></td>

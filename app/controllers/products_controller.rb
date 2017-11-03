@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  include CategoryOptions
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   # GET /products
@@ -22,12 +23,10 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
-    @category_options = Category.all.map{ |category| [ category.name, category.id ] }
   end
 
   # GET /products/1/edit
   def edit
-    @category_options = Category.all.map{ |category| [ category.name, category.id ] }
   end
 
   # POST /products

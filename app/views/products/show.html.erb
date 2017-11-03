@@ -12,13 +12,13 @@
     <%= @product.description.html_safe %> <br>
 
     <strong>Price:</strong>
-    $<%= @product.price.to_d / 100 %> <br>
+    <%= number_to_currency(@product.price.to_d / 100) %> <br>
 
     <strong>Item In Stock:</strong>
     <%= @product.sold %> <br>
 
     <strong>Seller:</strong>
-    <%= @product.shop.name %> <br>
+    <%= link_to @product.shop.name, @product.shop %> <br>
 
     <strong>Category:</strong>
     <%= @product.category.name %> <br>

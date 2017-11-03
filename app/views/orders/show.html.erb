@@ -1,9 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Customer:</strong>
-  <%= @order.customer_id %>
+  <strong>Order# <%= @order.id %></strong> <br>
+  
+  <% @order.order_products.each do |order_product| %>
+  	<%= order_product.product.name %>
+  	<%= order_product.quantity %>
+  	<%= number_to_currency(order_product.price.to_d / 100) %> <br>
+  <% end %>
+  <strong>Total: <%= number_to_currency(@order.order_details["amount"].to_d / 100) %></strong>
 </p>
 
-<%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>

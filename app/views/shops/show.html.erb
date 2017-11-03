@@ -11,6 +11,7 @@
   </div>
   <button id="save">Save</button>
   <%= link_to 'New Product', new_product_path, class: "btn btn-secondary" %>
+  <a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_BgZUTXVLiqEsR6A7ndHmhqzj6HR3s2d4&scope=read_write" class="stripe-connect light-blue"><span>Connect with Stripe</span></a>
 
   <div class="row">
     <% @products.each do |product| %>

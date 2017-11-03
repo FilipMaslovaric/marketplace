@@ -32,7 +32,7 @@ class CartController < ApplicationController
       )
     end
 
-    puts charge.inspect
+    session.delete(:cart)
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
@@ -44,20 +44,26 @@ class CartController < ApplicationController
 
     @total = 0
 
-   	session[:cart].each do |product_id, item|
-   		product = Product.find(product_id)
-      cart_products = { 
-   			:product => product, 
-   			:quantity => item["quantity"]
-   		}
 
-   	  @cart.push(cart_products)
+   	if !session[:cart].nil?
+      session[:cart].each do |product_id, item|
+     		product = Product.find(product_id)
+        cart_products = { 
+     			:product => product, 
+     			:quantity => item["quantity"]
+     		}
 
-      @total = @total + product.price * item["quantity"]
-   	end
+     	  @cart.push(cart_products)
 
-    
+        @total = @total + product.price * item["quantity"]
+     	end
+    end
 
+  end
+
+  def destroy
+    session[:cart].delete(params[:product_id])
+    redirect_to cart_path
   end
 
   def edit
