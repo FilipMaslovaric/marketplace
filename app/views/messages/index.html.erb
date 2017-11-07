@@ -1,7 +1,7 @@
 <% if @over_ten %>
  <%= link_to 'Show Previous', '?m=all' %>
 <% end %>
-<div>
+<div class="ui segment">
  <% @messages.each do |message| %>
   <% if message.body %>
    <% user = User.find(message.user_id) %>

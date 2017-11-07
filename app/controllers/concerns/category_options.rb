@@ -7,6 +7,7 @@ module CategoryOptions
 
 	def set_categories
     	@category_options = Category.all.map{ |category| [ category.name, category.id ] }
+    	@categories = Category.all
 	end
 
 end

@@ -1,4 +1,5 @@
 class MainController < ApplicationController
+  skip_before_action :authenticate_user!
   include CategoryOptions
   
   def home
@@ -17,7 +18,5 @@ class MainController < ApplicationController
   		end 
   	end
 
-    @categories = Category.all
-    
   end
 end

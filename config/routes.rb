@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'stripe/connect'
+
   get 'cart/create'
 
   get 'cart/show', to: 'cart#show', as: :cart
@@ -12,6 +14,8 @@ Rails.application.routes.draw do
   post 'cart/create'
 
   get 'main/home'
+
+  get 'stripe/connect'
 
   delete '/cart', to: 'cart#destroy', as: :cart_remove
 
