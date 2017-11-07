@@ -1,85 +1,49 @@
+<div class="pusher">
+  <div class="ui container">
 
-
-<div class="row">
-  
-  <div class="wrapper col-lg-3">
-    <nav id="sidebar">
-      <!-- Sidebar Header -->
-      <div class="sidebar-header">
-        <h3>Categories</h3>
-        <!-- Sidebar Links -->
-        <%= link_to 'All', root_path %> <br>
-        <% @categories.each do |category| %>
-          <%= link_to category.name, {:controller => "main", :action => "home", :category_id => category.id } %> <br>
+    <% if @products.any? %>
+      <div class="ui grid">
+        <div class="doubling four column row">
+        <% @products.each do |product| %>
+          <div class="column"> 
+            <div class="ui link cards">
+              <div class="card">
+                <div class="ui fluid image">
+                  <% if product.image == 0 %>
+                    <%= image_tag product.image = root_path << "placeholder_images/pillow.jpg", class: "img-responsive" %>
+                  <% else %>
+                    <%= image_tag product.image = Media.find(product.image).file_name.url, class: "img-responsive" %>
+                  <% end %>
+                </div>
+                <div class="content">
+                  <div class="header"><%= product.name %></div>
+                  <div class="meta">
+                    <a><%= product.category.name %></a>
+                  </div>
+                  <div class="description">
+                    <%= product.about %>
+                  </div>
+                </div>
+                <div class="extra content">
+                  <div class="ui right floated">
+                    <%= link_to 'View Product', product, class: "ui button" %>
+                  </div>
+                  <span>
+                    <%= number_to_currency(product.price.to_d / 100) %>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
         <% end %>
-
-      </div>
-    </nav>
-  </div>
-
-  <% if @products.any? %>
-    
-    <div class="col-lg-9 buffer">
-      <div class="navbar-buffer"></div>
-
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-            <% if user_signed_in? %>
-              <li>
-              <%= link_to current_user.shop.name, current_user.shop  %>
-              </li>
-              <li>
-              <%= link_to('(Logout)', destroy_user_session_path, method: :delete) %>        
-              </li>
-            <% else %>
-              <li>
-              <%= link_to('(Login)', new_user_session_path)  %>  
-              </li>
-            <% end %>
-              <li>
-              <%= link_to cart_path do %>
-                <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i></li>
-              <% end %>
-          </ul>
         </div>
       </div>
-    </nav>
-      <% @products.each do |product| %>
-        
-        <div class="col-lg-6 buffer">
-          
-          <div class="col-lg-6">
-            <%= link_to (image_tag @image, class: "img-responsive"), product %>
-          </div>
-          
-          <div class="col-lg-6">
-            <strong><%= product.name %></strong> <br>
-            <%= product.description.html_safe %> <br>
-            <%= number_to_currency(product.price.to_d / 100) %> <br>
-            <%= product.category.name %> <br>
-            <%= product.sold %> <br>
-          </div>
-        </div>
-      <% end %>
 
-
-
-    <% if @products.blank? %>
-      <h3>There are no products matching your query! Please try again!</h3>
+        <% if @products.blank? %>
+          <h3>There are no products matching your query! Please try again!</h3>
+        <% end %>
+      </div>
     <% end %>
-    </div>
-  <% end %>
-
+  </div>
 </div>
 

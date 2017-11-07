@@ -1,10 +1,12 @@
 class CartController < ApplicationController
+  skip_before_action :authenticate_user!
+
   def create
     @total = 0
 
     session[:cart].each do |product_id, item|
-      product = Product.find(product_id)
-      @total = @total + product.price * item["quantity"]
+      @product = Product.find(product_id)
+      @total = @total + @product.price * item["quantity"]
     end
 
     customer = Stripe::Customer.create(
@@ -16,8 +18,14 @@ class CartController < ApplicationController
       :customer    => customer.id,
       :amount      => @total,
       :description => 'Rails Stripe customer',
-      :currency    => 'aud'
+      :currency    => 'aud',
+      :destination => {
+        :amount => (@product.price * 0.8).to_i,
+        :account => @product.shop.user.stripe_user_id,
+      }
     )
+
+    puts charge.inspect
 
     order = Order.create(
         :order_details  => charge
@@ -88,6 +96,5 @@ class CartController < ApplicationController
 
   	session[:cart][params[:product_id]] = product
 
-  	redirect_to cart_path
   end
 end

@@ -1,38 +1,94 @@
+
+
+
 <p id="notice"><%= notice %></p>
-<div class="container">
-  <div id="product-image-dropzone" class="col-lg-6">
-    <%= image_tag @image, class: "img-responsive" %>
-  </div>
+<div class="ui container">
+  <div class="ui raised horizontal segments">
+    <div id="product-image-dropzone" class="ui padded segment">
+      <%= image_tag @image, class: "ui fluid image" %>
+    </div>
   
-  <div class="col-lg-6">
+    <div class="ui padded segment">
+      <div class="ui card">
+      <div class="content">
+        <div class="header">
+          <%= @product.name %>
+        </div>
+        <div class="meta">
+          <%= @product.category.name %>
+        </div>
+        <div class="description editable">
+          <%= @product.description.html_safe %>
+        </div>
+        <div class="header">
+          Shop: <%= link_to @product.shop.name, @product.shop %>
+        </div>
+        <div class="extra content">
+          <%= number_to_currency(@product.price.to_d / 100) %>
+          <div class="ui two buttons">
+            <%= form_with url: '/cart/add', :html => { :onsubmit => "return shoppingCart();" } do |form| %>
+              <%= form.hidden_field(:product_id, value: @product.id) %>
+              <%= form.select :quantity, options_for_select(@quantity), { prompt: "Select Quantity"}, class: "ui basic blue button" %>
+              <%= form.submit 'Add To Cart', class: "ui basic blue button" %>
+            <% end %>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
 
-    <strong><%= @product.name %></strong> <br>
+<script>
+  var shoppingCart = function(){
+    $('.ui.modal')
+      .modal('show')
+    ;
+  }
+</script>
 
-    <strong>Description:</strong>
-    <%= @product.description.html_safe %> <br>
 
-    <strong>Price:</strong>
-    <%= number_to_currency(@product.price.to_d / 100) %> <br>
+<div class="ui modal">
+  <i class="close icon"></i>
+    <div class="header">
+    <i class="large add to cart icon"></i>Shopping Cart
+    </div>
+    <div class="scrolling content">
+      <% if @cart.empty? %>
+        <h3>Your cart is empty man, what you trippin on!</h3>
+      <% else %>
+        <% @cart.each do |cart_item| %>
+          
+          <div class="image content">
+            
+            <div class="ui medium image">
+              <% if cart_item[:product].image == 0 %>
+                <%= image_tag cart_item[:product].image = root_path << "placeholder_images/pillow.jpg", class: "img-responsive" %>
+              <% else %>
+                <%= image_tag cart_item[:product].image = Media.find(cart_item[:product].image).file_name.url, class: "img-responsive" %>
+              <% end %>
+            </div>
+            
+            <div class="description">
+              <div class="ui header"><%= cart_item[:product].name %></div>
+                <p><%= cart_item[:product].description.html_safe %></p>
+                <p><%= number_to_currency(cart_item[:product].price.to_d / 100) %></p>
+                <p>QTY: <%= cart_item[:quantity] %></p>
+                <p><%= button_to 'Remove', {:controller => :cart, :action => 'destroy', :product_id => cart_item[:product].id }, :method => :delete, class: "ui black deny button" %></p>
+            </div>
 
-    <strong>Item In Stock:</strong>
-    <%= @product.sold %> <br>
-
-    <strong>Seller:</strong>
-    <%= link_to @product.shop.name, @product.shop %> <br>
-
-    <strong>Category:</strong>
-    <%= @product.category.name %> <br>
-    
-
-    <%= form_with url: '/cart/add' do |form| %>
-      <%= form.hidden_field(:product_id, value: @product.id) %>
-      <%= form.select :quantity, options_for_select(@quantity), { prompt: "Select Quantity"} %>
-      <%= form.submit 'Add To Cart' %>
+          </div>
+        <% end %>
     <% end %>
 
-  </div>
-
+    </div>
+      <div class="actions">
+        <%= link_to 'Continue Shopping', root_path, class: "ui basic blue button" %>
+        <%= link_to 'Checkout', cart_path, class: "ui basic blue button" %>
+      </div>
 </div>
+
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
