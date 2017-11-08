@@ -3,6 +3,10 @@ class MainController < ApplicationController
   include CategoryOptions
   
   def home
+    output = PurchaseMailer.confirm_purchase("test", "", 0).deliver_now
+
+    puts output.inspect 
+    
   	if (params.has_key?(:category_id))
   		@products = Product.where(category_id: params[:category_id])
   	else

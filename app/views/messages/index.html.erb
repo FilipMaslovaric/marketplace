@@ -1,6 +1,7 @@
 <% if @over_ten %>
  <%= link_to 'Show Previous', '?m=all' %>
 <% end %>
+<div class="ui container">
 <div class="ui segment">
  <% @messages.each do |message| %>
   <% if message.body %>
@@ -28,3 +29,4 @@
    <%= f.submit "Add Reply", class: "ui blue labeled submit icon button" %>
  </div>
 <% end %>
+</div>

@@ -27,7 +27,11 @@
         <% if user.id != current_user.id %>
           <div class="comment">
             <a class="avatar">
-              <%= user.id%>
+              <% if user.shop.logo == 0 %>
+                <%= image_tag user.shop.logo = root_path << "placeholder_images/logo.png", class: "img-responsive" %>
+              <% else %>
+                <%= image_tag user.shop.logo = Media.find(user.shop.logo).file_name.url, class: "img-responsive" %>
+              <% end %>
             </a>
             <div class="content">
               <a class="author"><%= user.email %></a>
