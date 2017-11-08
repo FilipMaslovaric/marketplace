@@ -11,30 +11,78 @@ class CartController < ApplicationController
       end
     end
 
+    puts session[:cart].inspect
+
     customer = Stripe::Customer.create(
       :email => params[:stripeEmail],
       :source  => params[:stripeToken]
     )
 
-    charge = Stripe::Charge.create(
-      :customer    => customer.id,
-      :amount      => @total,
-      :description => 'Rails Stripe customer',
-      :currency    => 'aud',
-      :destination => {
-        :amount => (@product.price * 0.8).to_i,
-        :account => @product.shop.user.stripe_user_id,
-      }
-    )
+    # charge = Stripe::Charge.create(
+    #   :customer    => customer.id,
+    #   :amount      => @total,
+    #   :description => 'Rails Stripe customer',
+    #   :currency    => 'aud'
+    # )
+
+
+
+    @sellers = {}
+    session[:cart].each do |product_id, item|
+      product = Product.find(product_id)
+      
+      puts "!!!!!!"
+      puts product.shop.inspect
+      # @seller = {
+      #   :shop_id  => product.shop.user.stripe_user_id,
+      #   :amount   => product.price * item["quantity"]
+      # }
+
+      stripe_account = product.shop.user.stripe_user_id
+
+      if !@sellers.key?(stripe_account)
+        @sellers[stripe_account] = 0
+      end
+
+      @sellers[stripe_account] += product.price * item["quantity"]
+      
+      puts "@@@@@@@"
+      puts @sellers.inspect
+
+    end
+
+    @sellers.each do |stripe_account, amount|
+
+      # Stripe::Payout.create(
+      # {
+      #   :amount => (amount * 100 * 0.8).to_i,
+      #   :currency => "aud"
+      #   },
+      #     {:stripe_account => stripe_account}
+      # )
+
+      @charge = Stripe::Charge.create({
+        :customer => customer.id,
+        :amount => amount.to_i,
+        :currency => "aud",
+        :destination => {
+          :amount   => (amount * 0.8).to_i,
+          :account  => stripe_account,
+        }
+      })
+
+    end
+
+
+
 
     item = 'Hey'
     email = params[:stripeEmail]
     PurchaseMailer.confirm_purchase(email, item, @total).deliver_now
 
-    puts charge.inspect
 
     order = Order.create(
-        :order_details  => charge
+        :order_details  => @charge
       )
 
     session[:cart].each do |product_id, item|
@@ -75,7 +123,8 @@ class CartController < ApplicationController
         @total = @total + product.price * item["quantity"]
      	end
     end
-
+    puts "@@@@@@"
+    puts session[:cart].inspect
   end
 
   def destroy
