@@ -4,9 +4,11 @@ class CartController < ApplicationController
   def create
     @total = 0
 
-    session[:cart].each do |product_id, item|
-      @product = Product.find(product_id)
-      @total = @total + @product.price * item["quantity"]
+    if !session[:cart].nil?
+      session[:cart].each do |product_id, item|
+        @product = Product.find(product_id)
+        @total = @total + @product.price * item["quantity"]
+      end
     end
 
     customer = Stripe::Customer.create(
@@ -25,11 +27,16 @@ class CartController < ApplicationController
       }
     )
 
+    item = 'Hey'
+    email = params[:stripeEmail]
+    PurchaseMailer.confirm_purchase(email, item, @total).deliver_now
+
     puts charge.inspect
 
     order = Order.create(
         :order_details  => charge
       )
+
     session[:cart].each do |product_id, item|
       product = Product.find(product_id)
       order_products = OrderProduct.create(
@@ -41,6 +48,8 @@ class CartController < ApplicationController
     end
 
     session.delete(:cart)
+
+    redirect_to root_path
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
