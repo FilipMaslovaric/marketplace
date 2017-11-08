@@ -5,8 +5,8 @@
   </div>
 </div>
 
-<div class="container">
-  <div class="editable buffer">
+<div class="ui container buffer">
+  <div class="editable">
     <%= @shop.about.html_safe %>
   </div>
 
@@ -20,10 +20,12 @@
     <%= link_to 'New Product', new_product_path, class: "btn btn-secondary" %>
   <% end %>
 
+<div class="ui container buffer">
+  <h1>Products</h1>
   <div class="ui grid">
     <div class="doubling four column row">
       <% @products.each do |product| %>
-        <div class="column"> 
+        <div class="column buffer"> 
           <div class="ui link cards">
             <div class="card">
               <div class="ui fluid image">
@@ -56,7 +58,7 @@
       <% end %>
     </div>
   </div>
-
+</div>
   <%= link_to 'Edit', edit_shop_path(@shop) %> |
   <%= link_to 'Back', shops_path %>
 </div>
