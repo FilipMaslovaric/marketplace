@@ -1,15 +1,36 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Orders</h1>
-
-    <% @orders.each do |order| %>
-      <%= order.created_at %>
-      <%= number_to_currency(order.order_details["amount"].to_d / 100) %>
-      <%= order.order_details["source"]["last4"] %>
-      <%= link_to 'Show', order %>
-      <%= link_to 'Edit', edit_order_path(order) %>
-      <%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %> <br>
-    <% end %>
-
-<br>
-
+<div class="ui container">
+  <div class="ui icon message">
+    <i class="inbox icon"></i>
+    <div class="content">
+      <div class="header">
+        Orders
+      </div>
+    </div>
+  </div>
+  	<table class="ui striped table">
+	  <thead>
+	    <tr>
+	      <th>Order ID#</th>
+	      <th>Date</th>
+	      <th>Customer ID</th>
+	      <th>Total Amount</th>
+	      <th>Last 4</th>
+	      <th>Order Details</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  	<% @orders.each do |order| %>
+		    <tr>
+		      <td><%= order.id %></td>
+		      <td><%= order.created_at.strftime("%d/%m/%Y") %></td>
+		      <td><%= order.order_details["customer"] %></td>
+		      <td><%= number_to_currency(order.order_details["amount"].to_d / 100) %></td>
+		      <td><%= order.order_details["source"]["last4"] %></td>
+		      <td><%= link_to 'Show', order, class: "ui button" %></td>
+		    </tr>
+		<% end %>
+	  </tbody>
+	</table>
+</div>

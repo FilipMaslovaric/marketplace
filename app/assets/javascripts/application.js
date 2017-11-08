@@ -32,8 +32,20 @@ function save() {
 
 $( document ).on('turbolinks:load', function() {
   console.log("jsready");
+
+  $('.message .close')
+    .on('click', function() {
+      $(this)
+        .closest('.message')
+        .transition('fade')
+      ;
+    })
+  ;
+  
   var editor = new MediumEditor('.editable');
+  
   $("#save").on('click', save);
+  
   if (document.getElementById('logo-dropzone')) {
     var options = {
       init: function() {

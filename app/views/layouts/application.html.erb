@@ -40,9 +40,7 @@
   </div>
   
 
-
 <div class="pusher">
-
   <div class="navbar-buffer"></div>
     <div class="ui fixed secondary menu">
       <%= link_to 'Home', root_path, class: "item" %>
@@ -51,16 +49,20 @@
       </a>
       <% if user_signed_in? %>
         <%= link_to 'Messages', conversations_path, class: "ui item" %>
-      <% end %>    
+      <% end %> 
+      <% if current_user.has_role? :admin %>
+        <%= link_to 'Admin', orders_path, class: "ui item" %>
+      <% end %>
+      <%= link_to cart_path, class: "ui item" do %>
+        <i class="large add to cart icon"></i>
+      <% end %>   
       <div class="right menu">
         <% if user_signed_in? %>
           <%= link_to current_user.shop.name, current_user.shop, class: "ui item"  %>
           <%= link_to('(Logout)', destroy_user_session_path, method: :delete, class: "ui item") %> 
         <% else %>
-          <%= link_to('(Login)', new_user_session_path, class: "ui item") %>  
-        <% end %>
-        <%= link_to cart_path, class: "ui item" do %>
-          <i class="large add to cart icon"></i>
+          <%= link_to('Login', new_user_session_path, class: "ui item") %>
+          <%= link_to('Sign Up', new_user_registration_path, class: "ui item") %>
         <% end %>
       </div>
     </div>

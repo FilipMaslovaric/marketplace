@@ -1,14 +1,39 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Order# <%= @order.id %></strong> <br>
-  
-  <% @order.order_products.each do |order_product| %>
-  	<%= order_product.product.name %>
-  	<%= order_product.quantity %>
-  	<%= number_to_currency(order_product.price.to_d / 100) %> <br>
-  <% end %>
-  <strong>Total: <%= number_to_currency(@order.order_details["amount"].to_d / 100) %></strong>
-</p>
 
-<%= link_to 'Back', orders_path %>
+
+<div class="ui container">
+  <div class="ui icon message">
+    <i class="inbox icon"></i>
+    <div class="content">
+      <div class="header">
+        Order# <%= @order.id %>
+      </div>
+    </div>
+  </div>
+  	<table class="ui striped table">
+	  <thead>
+	    <tr>
+	      <th>Shop Name</th>
+	      <th>Product</th>
+	      <th>Quantity</th>
+	      <th>Unit Price</th>
+	      <th>Total Amount</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  	<% @order.order_products.each do |order_product| %>
+		    <tr>
+		      <td><%= order_product.product.shop.name %></td>
+		      <td><%= order_product.product.name %></td>
+		      <td><%= order_product.quantity %></td>
+		      <td><%= number_to_currency(order_product.price.to_d / 100) %></td>
+		      <td><%= number_to_currency((order_product.price * order_product.quantity).to_d / 100) %></td>
+		    </tr>
+		<% end %>
+	  </tbody>
+	</table>
+<%= link_to 'Back To Orders', orders_path, class: "ui button" %>
+
+</div>
+
