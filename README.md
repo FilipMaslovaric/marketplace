@@ -55,30 +55,30 @@ Link: [https://trello.com/b/6RHt5sse/marketplace/](https://trello.com/b/6RHt5sse
 1. Clone repo
 2. Run bundle install
 3. Create .env file in the root dir with the following config variables
-⋅⋅* POSTGRES_PASSWORD // postgreSQL
-⋅⋅* PUBLISHABLE_KEY // stripe
-⋅⋅* SECRET_KEY // stripe
-⋅⋅* AWS_ACCESS_KEY_ID // amazon
-⋅⋅* AWS_REGION // amazon
-⋅⋅* AWS_SECRET_ACCESS_KEY // amazon
-⋅⋅* S3_BUCKET_NAME // amazon s3
-⋅⋅* SECRET_KEY_BASE // stripe
-⋅⋅* MAILGUN_API_KEY // mailgun
-⋅⋅* MAILGUN_DOMAIN // mailgun
-⋅⋅* MY_EMAIL // administrator email - must validate in mailgun dashboard
+  - POSTGRES_PASSWORD // postgreSQL
+  - PUBLISHABLE_KEY // stripe
+  - SECRET_KEY // stripe
+  - AWS_ACCESS_KEY_ID // amazon
+  - AWS_REGION // amazon
+  - AWS_SECRET_ACCESS_KEY // amazon
+  - S3_BUCKET_NAME // amazon s3
+  - SECRET_KEY_BASE // stripe
+  - MAILGUN_API_KEY // mailgun
+  - MAILGUN_DOMAIN // mailgun
+  - MY_EMAIL // administrator email - must validate in mailgun dashboard
 4. Run rails db:create
 5. Run rails db:migrate
 6. Run rails server
 7. Create first user (sign up form)
 8. Run rails console
 9. Give first user admin role
-⋅⋅* user = User.find(1)
-⋅⋅* user.add_role :admin (to assign admin role)
-⋅⋅* user.save (to save role)
-⋅⋅* user.has_role? :admin (should now return => true)
+  - user = User.find(1)
+  - user.add_role :admin (to assign admin role)
+  - user.save (to save role)
+  - user.has_role? :admin (should now return => true)
 10. Create categories
-⋅⋅* Category.create( name: "category" )
-⋅⋅* Repeat process until you are happy with categroies
+  - Category.create( name: "category" )
+  - Repeat process until you are happy with categroies
 11. Run rails server 
 12. Create next user (sign up form)
 13. Background image can be changed form preset image via drag and drop
@@ -89,23 +89,23 @@ Link: [https://trello.com/b/6RHt5sse/marketplace/](https://trello.com/b/6RHt5sse
 ---
 ## 7. Gems
 1. gem 'pg' 
-⋅⋅* Link: [https://github.com/ged/ruby-pg](https://github.com/ged/ruby-pg)
+  - Link: [https://github.com/ged/ruby-pg](https://github.com/ged/ruby-pg)
 2. gem 'devise'
-⋅⋅* [https://github.com/plataformatec/devise](https://github.com/plataformatec/devise)
+  - [https://github.com/plataformatec/devise](https://github.com/plataformatec/devise)
 3. gem 'carrierwave', '~> 1.0'
-⋅⋅* [https://github.com/carrierwaveuploader/carrierwave](https://github.com/carrierwaveuploader/carrierwave)
+  - [https://github.com/carrierwaveuploader/carrierwave](https://github.com/carrierwaveuploader/carrierwave)
 4. gem 'stripe'
-⋅⋅* [https://github.com/stripe/stripe-ruby](https://github.com/stripe/stripe-ruby)
+  - [https://github.com/stripe/stripe-ruby](https://github.com/stripe/stripe-ruby)
 5. gem 'dotenv-rails', groups: [:development, :test]
-⋅⋅* [https://github.com/bkeepers/dotenv](https://github.com/bkeepers/dotenv)
+  - [https://github.com/bkeepers/dotenv](https://github.com/bkeepers/dotenv)
 6. gem 'carrierwave-aws'
-⋅⋅* [https://github.com/sorentwo/carrierwave-aws](https://github.com/sorentwo/carrierwave-aws)
+  - [https://github.com/sorentwo/carrierwave-aws](https://github.com/sorentwo/carrierwave-aws)
 7. gem 'httparty'
-⋅⋅* [https://github.com/jnunemaker/httparty](https://github.com/jnunemaker/httparty)
+  - [https://github.com/jnunemaker/httparty](https://github.com/jnunemaker/httparty)
 8. gem 'mailgun-ruby', '~>1.1.6'
-⋅⋅* [https://github.com/mailgun/mailgun-ruby](https://github.com/mailgun/mailgun-ruby)
+  - [https://github.com/mailgun/mailgun-ruby](https://github.com/mailgun/mailgun-ruby)
 9. gem 'rolify'
-⋅⋅* [https://github.com/RolifyCommunity/rolify](https://github.com/RolifyCommunity/rolify)
+  - [https://github.com/RolifyCommunity/rolify](https://github.com/RolifyCommunity/rolify)
 
 ---
 ## 8. Ruby Version
