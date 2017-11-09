@@ -14,7 +14,7 @@
 
 Enter text here
 
-Link : [http://shrouded-spire-66335.herokuapp.com](http://shrouded-spire-66335.herokuapp.com)
+Link : [https://digitalmarketplace.herokuapp.com/](https://digitalmarketplace.herokuapp.com/)
 
 ---
 ## 2. App Requirements
@@ -46,7 +46,7 @@ Link : [http://shrouded-spire-66335.herokuapp.com](http://shrouded-spire-66335.h
 ## 5. Entity relationship diagram / DB Schema
 
 
-![alt text](https://trello-attachments.s3.amazonaws.com/582267b2b78b42ccc28f4ca0/582317f7713e5354c16e17cc/be793184fbedca9b60e485653cb8b2e5/ReSUS_Schema-Final_PostReview.png)
+![ERD](public/readme_images/erd.png?raw=true)
 
 ---
 ## 6. Configuration, Database Creation & Database Initalisation
