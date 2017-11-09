@@ -1,12 +1,9 @@
 class ShopsController < ApplicationController
   skip_before_action :authenticate_user!
-  before_action :set_shop, only: [:show, :edit, :update, :destroy]
+  before_action :set_shop, only: [:show, :edit, :update]
 
   # GET /shops
   # GET /shops.json
-  def index
-    @shops = Shop.all
-  end
 
   # GET /shops/1
   # GET /shops/1.json

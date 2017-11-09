@@ -1,13 +1,11 @@
 class ProductsController < ApplicationController
   include CategoryOptions
   skip_before_action :authenticate_user!
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update]
 
   # GET /products
   # GET /products.json
-  def index
-    @products = Product.all
-  end
+
 
   # GET /products/1
   # GET /products/1.json

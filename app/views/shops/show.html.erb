@@ -15,11 +15,13 @@
     
     <div class="buffer">
 
-      <button id="save" class="ui button">Save Content Changes</button>
-      <%= link_to 'Edit Shop Details', edit_shop_path(@shop), class: "ui button" %> 
+      <button id="save" class="ui button"><i class="indent icon"></i>Save Content Changes</button>
+      <%= link_to edit_shop_path(@shop) do %> 
+        <button class="ui button"><i class="shopping basket icon"></i>Edit Shop Details</button>
+      <% end %>
 
       <% if @shop.user == current_user and current_user.stripe_user_id.nil? %>
-        <a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_BgZUTXVLiqEsR6A7ndHmhqzj6HR3s2d4&scope=read_write" class="stripe-connect light-blue"><span>Connect with Stripe</span></a>
+        <a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_BgZUTXVLiqEsR6A7ndHmhqzj6HR3s2d4&scope=read_write" class="stripe-connect light-blue"><span class="ui blue button"><i class="stripe icon"></i>Connect with Stripe</span></a>
       <% elsif @shop.user == current_user %>
         <%= link_to 'New Product', new_product_path, class: "ui button" %>
       <% end %>
