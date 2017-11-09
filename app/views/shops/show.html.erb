@@ -1,64 +1,71 @@
-<div id="background-dropzone" class="image-div" style="background-image: url(<%= image_path @background %>); ">
+<div <% if current_user == @shop.user %> id="background-dropzone" <% end %> class="image-div" style="background-image: url(<%= image_path @background %>); ">
   <h1 class="business-name" ><%= @shop.name %></h1>
-  <div id="logo-dropzone">
+  <div <% if current_user == @shop.user %> id="logo-dropzone" <% end %> >
     <%= image_tag @logo, class: "logo img-responsive" %>
   </div>
 </div>
 
 <div class="ui container buffer">
-  <div class="editable">
+  
+  <div <% if current_user == @shop.user %> class="editable" <% end %> >
     <%= @shop.about.html_safe %>
   </div>
 
   <% if @shop.user == current_user %>
-    <button id="save">Save</button>
+    
+    <div class="buffer">
+
+      <button id="save" class="ui button">Save Content Changes</button>
+      <%= link_to 'Edit Shop Details', edit_shop_path(@shop), class: "ui button" %> 
+
+      <% if @shop.user == current_user and current_user.stripe_user_id.nil? %>
+        <a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_BgZUTXVLiqEsR6A7ndHmhqzj6HR3s2d4&scope=read_write" class="stripe-connect light-blue"><span>Connect with Stripe</span></a>
+      <% elsif @shop.user == current_user %>
+        <%= link_to 'New Product', new_product_path, class: "ui button" %>
+      <% end %>
+
+    </div>
+
   <% end %>
 
-  <% if @shop.user == current_user and current_user.stripe_user_id.nil? %>
-    <a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_BgZUTXVLiqEsR6A7ndHmhqzj6HR3s2d4&scope=read_write" class="stripe-connect light-blue"><span>Connect with Stripe</span></a>
-  <% elsif @shop.user == current_user %>
-    <%= link_to 'New Product', new_product_path, class: "btn btn-secondary" %>
-  <% end %>
 
-<div class="ui container buffer">
-  <h1>Products</h1>
-  <div class="ui grid">
-    <div class="doubling four column row">
-      <% @products.each do |product| %>
-        <div class="column buffer"> 
-          <div class="ui link cards">
-            <div class="card">
-              <div class="ui fluid image">
-                <% if product.image == 0 %>
-                  <%= image_tag product.image = root_path << "placeholder_images/pillow.jpg", class: "img-responsive" %>
-                <% else %>
-                  <%= image_tag product.image = Media.find(product.image).file_name.url, class: "img-responsive" %>
-                <% end %>
-              </div>
-              <div class="content">
-                <div class="header"><%= product.name %></div>
-                <div class="meta">
-                  <a><%= product.category.name %></a>
+  <div class="ui container buffer">
+    <h1>Products</h1>
+    <div class="ui grid">
+      <div class="doubling four column row">
+        <% @products.each do |product| %>
+          <div class="column buffer"> 
+            <div class="ui link cards">
+              <div class="card">
+                <div class="ui fluid image">
+                  <% if product.image == 0 %>
+                    <%= image_tag product.image = root_path << "placeholder_images/pillow.jpg", class: "img-responsive" %>
+                  <% else %>
+                    <%= image_tag product.image = Media.find(product.image).file_name.url, class: "img-responsive" %>
+                  <% end %>
                 </div>
-                <div class="description">
-                  <%= product.about %>
+                <div class="content">
+                  <div class="header"><%= product.name %></div>
+                  <div class="meta">
+                    <a><%= product.category.name %></a>
+                  </div>
+                  <div class="description">
+                    <%= product.about %>
+                  </div>
                 </div>
-              </div>
-              <div class="extra content">
-                <div class="ui right floated">
-                  <%= link_to 'View Product', product, class: "ui button" %>
+                <div class="extra content">
+                  <div class="ui right floated">
+                    <%= link_to 'View Product', product, class: "ui button" %>
+                  </div>
+                  <span>
+                    <%= number_to_currency(product.price.to_d / 100) %>
+                  </span>
                 </div>
-                <span>
-                  <%= number_to_currency(product.price.to_d / 100) %>
-                </span>
               </div>
             </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
-</div>
-  <%= link_to 'Edit', edit_shop_path(@shop) %> |
-  <%= link_to 'Back', shops_path %>
 </div>

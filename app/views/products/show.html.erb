@@ -5,7 +5,7 @@
 
   <div class="ui raised horizontal segments">
     
-    <div id="product-image-dropzone" class="ui padded segment">
+    <div <% if current_user == @product.shop.user %> id="product-image-dropzone" <% end %> class="ui padded segment">
       <%= image_tag @image, class: "ui large image" %>
     </div>
   

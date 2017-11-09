@@ -50,7 +50,7 @@
       <% if user_signed_in? %>
         <%= link_to 'Messages', conversations_path, class: "ui item" %>
       <% end %> 
-      <% if current_user.has_role? :admin %>
+      <% if user_signed_in? and current_user.has_role? :admin %>
         <%= link_to 'Admin', orders_path, class: "ui item" %>
       <% end %>
       <%= link_to cart_path, class: "ui item" do %>
