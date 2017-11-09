@@ -19,21 +19,21 @@ Link : [http://shrouded-spire-66335.herokuapp.com](http://shrouded-spire-66335.h
 ---
 ## 2. App Requirements
 
-![alt text](http://findicons.com/files/icons/1581/silk/16/tick.png)1. Create your application using Ruby on Rails     
-![alt text](http://findicons.com/files/icons/1581/silk/16/tick.png)2. Demonstrate knowledge of Rails conventions.  
-![alt text](http://findicons.com/files/icons/1581/silk/16/tick.png)3. Use postgresql database in development.  
-![alt text](http://findicons.com/files/icons/1581/silk/16/tick.png)4. Use an API (eg. Omniauth, Geocoding, Maps, other..). '(Stripe)'  
-![alt text](http://findicons.com/files/icons/1581/silk/16/tick.png)5. Use appropriate gems.  
-![alt text](http://findicons.com/files/icons/1581/silk/16/tick.png)6. Use environmental variables to protect API keys etc. '(Config variables assigned in Heroku settings.)'  
-![alt text](http://findicons.com/files/icons/1581/silk/16/tick.png)7. Implement a payment system for your product. '(Stripe used)'  
-![alt text](http://findicons.com/files/icons/1581/silk/16/tick.png)8. Your app must send transactional emails (eg. using Mailgun). '(Mailgun)'    
-![alt text](http://findicons.com/files/icons/1581/silk/16/tick.png)9. Your app should have an internal user messaging system. '(Custom Message Service)'   
-![alt text](http://findicons.com/files/icons/1581/silk/16/tick.png)10. Your app will have some type of searching, sorting and or filtering capability.    
-![alt text](http://findicons.com/files/icons/1581/silk/16/tick.png)11. Your app will have some type of file uploading capability (eg. images). '(Carrierwave) ' 
-![alt text](http://findicons.com/files/icons/1581/silk/16/tick.png)12. Your app will have authentication (eg. Devise, must have full functionality in place). '(Devise)' 
-![alt text](http://findicons.com/files/icons/1581/silk/16/tick.png)13. Your app will have authorisation (users have restrictions on what they can see and edit). '(Users don't have access to admin pages.)'
-![alt text](http://findicons.com/files/icons/1581/silk/16/tick.png)16. Your app will have an admin dashboard for the admin user to administrate the site. '(Admin can view orders.)'
-![alt text](http://findicons.com/files/icons/1581/silk/16/tick.png)17. Document your application with a README that explains how to setup, configure and use your application.  
+Create your application using Ruby on Rails.
+Demonstrate knowledge of Rails conventions.
+Use postgresql database in development.
+Use an API (eg. Omniauth, Geocoding, Maps, other..).
+Use appropriate gems.
+Use environmental variables to protect API keys etc. (dotenv)
+Implement a payment system for your product. (e.g. Stripe)
+Your app must send transactional emails (eg. using Mailgun).
+Your app should have an internal user messaging system.
+Your app will have some type of searching, sorting and/or filtering capability.
+Your app will have some type of file uploading capability (eg. images).
+Your app will have authentication (eg. Devise, must have full functionality in place).
+Your app will have authorisation (users have restrictions on what they can see and edit).
+Your app may have an admin dashboard for the admin user to administrate the site.
+Document your application with a README that explains how to setup, configure and use your application. 
 
 
 ---
