@@ -2,13 +2,6 @@
 
 <div class="ui container">
 
-  <div class="ui message">
-    <i class="close icon"></i>
-    <div class="header">
-      Success!
-    </div>
-    <p><%= notice %></p>
-  </div>
 
   <div class="ui raised horizontal segments">
     
@@ -28,7 +21,7 @@
         <div class="meta">
           <%= @product.category.name %>
         </div>
-        <div class="description editable">
+        <div class="description <% if current_user == @product.shop.user %> editable <% end %> ">
           <%= @product.description.html_safe %>
         </div>
 

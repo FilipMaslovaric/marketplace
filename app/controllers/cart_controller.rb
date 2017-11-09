@@ -149,7 +149,7 @@ class CartController < ApplicationController
 
   	session[:cart][params[:product_id]] = product
 
-    redirect_to product_path(params[:id])
+    redirect_to root_path, notice: "Item added to cart" 
 
   end
 end

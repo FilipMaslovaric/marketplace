@@ -66,7 +66,7 @@ class OrdersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def authorise_admin
       if !current_user.has_role? :admin
-        redirect_to root_path, notice: 'Unauthorized Access!'
+        redirect_to root_path, alert: 'Unauthorized Access!'
       end
     end
 
