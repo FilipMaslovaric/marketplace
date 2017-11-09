@@ -19,21 +19,21 @@ Link : [http://shrouded-spire-66335.herokuapp.com](http://shrouded-spire-66335.h
 ---
 ## 2. App Requirements
 
-Create your application using Ruby on Rails.
-Demonstrate knowledge of Rails conventions.
-Use postgresql database in development.
-Use an API (eg. Omniauth, Geocoding, Maps, other..).
-Use appropriate gems.
-Use environmental variables to protect API keys etc. (dotenv)
-Implement a payment system for your product. (e.g. Stripe)
-Your app must send transactional emails (eg. using Mailgun).
-Your app should have an internal user messaging system.
-Your app will have some type of searching, sorting and/or filtering capability.
-Your app will have some type of file uploading capability (eg. images).
-Your app will have authentication (eg. Devise, must have full functionality in place).
-Your app will have authorisation (users have restrictions on what they can see and edit).
-Your app may have an admin dashboard for the admin user to administrate the site.
-Document your application with a README that explains how to setup, configure and use your application. 
+1. Create your application using Ruby on Rails.
+2. Demonstrate knowledge of Rails conventions.
+3. Use postgresql database in development.
+4. Use an API (eg. Omniauth, Geocoding, Maps, other..).
+5. Use appropriate gems.
+6. Use environmental variables to protect API keys etc. (dotenv)
+7. Implement a payment system for your product. (e.g. Stripe)
+8. Your app must send transactional emails (eg. using Mailgun).
+9. Your app should have an internal user messaging system.
+10. Your app will have some type of searching, sorting and/or filtering capability.
+11. Your app will have some type of file uploading capability (eg. images).
+12. Your app will have authentication (eg. Devise, must have full functionality in place).
+13. Your app will have authorisation (users have restrictions on what they can see and edit).
+14. Your app may have an admin dashboard for the admin user to administrate the site.
+15. Document your application with a README that explains how to setup, configure and use your application. 
 
 
 ---
