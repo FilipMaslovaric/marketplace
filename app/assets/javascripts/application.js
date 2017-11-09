@@ -30,6 +30,22 @@ function save() {
   });
 }
 
+function saveProd() {
+  console.log('saving')
+  $("#save").addClass('busy')
+  product = {}
+  product['description'] = $('.editable').html();
+  $.ajax({
+    type: 'PUT',
+    dataType: 'json',
+    contentType: "application/json; charset=utf-8",
+    success: function(data) {
+      $("#save").removeClass('busy')
+    },
+    data: JSON.stringify(product)
+  });
+}
+
 $( document ).on('turbolinks:load', function() {
   console.log("jsready");
 
@@ -49,6 +65,8 @@ $( document ).on('turbolinks:load', function() {
   var editor = new MediumEditor('.editable');
   
   $("#save").on('click', save);
+
+  $("#saveProd").on('click', saveProd);
   
   if (document.getElementById('logo-dropzone')) {
     var options = {

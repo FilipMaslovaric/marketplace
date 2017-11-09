@@ -67,6 +67,28 @@
       </div>
     </div>
 
+    <% if flash.alert %>
+      <div class="ui container">
+        <div class="ui error message">
+          <i class="close icon"></i>
+            <div class="header">
+              Warning!
+            </div>
+          <p><%= flash.alert %></p>
+        </div>
+      </div>
+    <% elsif flash.notice %>
+      <div class="ui container">
+        <div class="ui message">
+          <i class="close icon"></i>
+            <div class="header">
+              Success!
+            </div>
+          <p><%= flash.notice %></p>
+        </div>
+      </div>
+    <% end %>
+
     <%= yield %>
 
   </div>

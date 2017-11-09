@@ -27,17 +27,35 @@
 
         <div class="extra content">
           <%= number_to_currency(@product.price.to_d / 100) %>
-          <div class="ui two buttons">
+          
+          <div class="ui">
+            
             <%= form_with url: '/cart/add' do |form| %>
               <%= form.hidden_field(:product_id, value: @product.id) %>
-              <%= form.select :quantity, options_for_select(@quantity), { prompt: "Select Quantity"}, class: "ui basic blue button" %>
-              <%= form.submit 'Add To Cart', class: "ui basic blue button" %>
+              <div class="button-buffer">
+                <%= form.label :quantity, 'QTY:' %>
+                <%= form.select :quantity, options_for_select(@quantity), class: "ui button" %>
+                <%= form.submit 'Add To Cart', class: "ui button" %>
+              </div>
             <% end %>
+            
+
           </div>
+
         </div>
-        
       </div>
     </div>
+
+        <% if @product.shop.user == current_user %>
+          
+          <div class="ui">
+
+            <button id="saveProd" class="ui button">Save Description Changes</button>
+            <%= link_to 'Edit Product Details', edit_product_path(@product), class: "ui button" %> 
+
+          </div>
+
+        <% end %>
   </div>
   </div>
 </div>
@@ -66,6 +84,3 @@
       </div>
 </div>
 
-
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>

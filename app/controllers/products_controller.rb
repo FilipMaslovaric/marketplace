@@ -78,6 +78,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     @product.shop = current_user.shop
+    @product.image = 0
 
     respond_to do |format|
       if @product.save
