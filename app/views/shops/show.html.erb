@@ -1,6 +1,6 @@
-<div <% if current_user == @shop.user %> id="background-dropzone" <% end %> class="image-div" style="background-image: url(<%= image_path @background %>); ">
+<div id="background-dropzone" class="image-div" style="background-image: url(<%= image_path @background %>); ">
   <h1 class="business-name" ><%= @shop.name %></h1>
-  <div <% if current_user == @shop.user %> id="logo-dropzone" <% end %> >
+  <div id="logo-dropzone" >
     <%= image_tag @logo, class: "logo img-responsive" %>
   </div>
 </div>
