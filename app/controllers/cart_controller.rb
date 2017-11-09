@@ -30,9 +30,7 @@ class CartController < ApplicationController
     @sellers = {}
     session[:cart].each do |product_id, item|
       product = Product.find(product_id)
-      
-      puts "!!!!!!"
-      puts product.shop.inspect
+
       # @seller = {
       #   :shop_id  => product.shop.user.stripe_user_id,
       #   :amount   => product.price * item["quantity"]
@@ -46,9 +44,6 @@ class CartController < ApplicationController
 
       @sellers[stripe_account] += product.price * item["quantity"]
       
-      puts "@@@@@@@"
-      puts @sellers.inspect
-
     end
 
     @sellers.each do |stripe_account, amount|
@@ -153,6 +148,8 @@ class CartController < ApplicationController
   	}
 
   	session[:cart][params[:product_id]] = product
+
+    redirect_to product_path(params[:id])
 
   end
 end

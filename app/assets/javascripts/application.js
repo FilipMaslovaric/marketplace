@@ -41,6 +41,10 @@ $( document ).on('turbolinks:load', function() {
       ;
     })
   ;
+
+  $('.special.cards .image').dimmer({
+    on: 'hover'
+  });
   
   var editor = new MediumEditor('.editable');
   

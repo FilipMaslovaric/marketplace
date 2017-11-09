@@ -1,46 +1,78 @@
-<h1>Cart</h1>
+<div class="ui container">
 
-<%= form_with url: '/cart/create' do %>
-  <article>
-    <% if flash[:error].present? %>
-      <div id="error_explanation">
-        <p><%= flash[:error] %></p>
-      </div>
+  
+<div class="ui icon message">
+  <i class="massive add to cart icon"></i>
+  <div class="content">
+    <div class="header">
+      Shopping Cart!
+    </div>
+    <p>Please review your items and proceed to checkout.</p>
+  </div>
+
+  <div>
+    <%= form_with url: '/cart/create' do %>
+        <% if flash[:error].present? %>
+          <div id="error_explanation">
+            <p><%= flash[:error] %></p>
+          </div>
+        <% end %>
+        <div class="header">
+          <span>Total: <%= number_to_currency(@total.to_d / 100) %></span>
+        </div>
+
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+              data-description="MarketPlace Products"
+              data-amount="<%= @total %>"
+              data-locale="auto"></script>
     <% end %>
-    <label class="amount">
-      <span>Amount: <%= number_to_currency(@total.to_d / 100) %></span>
-    </label>
-  </article>
+  </div>
 
-  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-          data-description="A month's subscription"
-          data-amount="<%= @total %>"
-          data-locale="auto"></script>
-<% end %>
+</div>
 
 
+  <div class="ui segment">
+    <% if @cart.empty? %>
+      <h3>Your cart is currently empty!</h3>
+    <% else %>
+    <h3 class="ui dividing header">Cart Products</h3>
+    	<% @cart.each do |cart_item| %>
+      <div class="ui special cards">
+        <div class="card">
+          <div class="blurring dimmable image">
+            <div class="ui dimmer">
+              <div class="content">
+                <div class="center">
+                  <%= button_to 'Remove From Cart', {:controller => :cart, :action => 'destroy', :product_id => cart_item[:product].id }, :method => :delete, :class => "ui inverted button" %>
+                </div>
+              </div>
+            </div>
+            <% if cart_item[:product].image == 0 %>
+              <%= image_tag cart_item[:product].image = root_path << "placeholder_images/pillow.jpg", class: "ui small image" %>
+            <% else %>
+              <%= image_tag cart_item[:product].image = Media.find(cart_item[:product].image).file_name.url, class: "ui small image" %>
+            <% end %>
+          </div>
+          <div class="content">
+            <a class="header"><%= cart_item[:product].name %></a>
+            <div class="meta">
+              <span class="date"><%= number_to_currency(cart_item[:product].price.to_d / 100) %> ea</span>
+            </div>
+          </div>
+          <div class="extra content">
+            <div class="ui right floated">
+              SubTotal: <%= number_to_currency(cart_item[:quantity] * cart_item[:product].price.to_d / 100) %>
+            </div>
+            <div>
+              QTY: <%= cart_item[:quantity] %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    <% end %>
+    		
+  </div>
 
-<div class="row">
-  <% if @cart.empty? %>
-    <h3>Your cart empty you broke!</h3>
-  <% else %>
-  	<% @cart.each do |cart_item| %>
-  		<div class="col-lg-6 buffer">
-          	<div class="col-lg-6">
-  				<% if cart_item[:product].image == 0 %>
-  			    	<%= image_tag cart_item[:product].image = root_path << "placeholder_images/pillow.jpg", class: "img-responsive" %>
-  			    <% else %>
-  			    	<%= image_tag cart_item[:product].image = Media.find(cart_item[:product].image).file_name.url, class: "img-responsive" %>
-  			    <% end %>
-  			</div>
-  			<div class="col-lg-6">
-  				<%= cart_item[:product].name %> <br>
-  				<%= number_to_currency(cart_item[:product].price.to_d / 100) %> <br>
-          QTY: <%= cart_item[:quantity] %> <br>
-  				<%= button_to 'Remove', {:controller => :cart, :action => 'destroy', :product_id => cart_item[:product].id }, :method => :delete %> <br>
-  			</div>
-  		</div>
-  	<% end %>
-  <% end %>
 </div>
