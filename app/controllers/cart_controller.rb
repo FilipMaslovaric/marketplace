@@ -11,7 +11,6 @@ class CartController < ApplicationController
       end
     end
 
-    puts session[:cart].inspect
 
     customer = Stripe::Customer.create(
       :email => params[:stripeEmail],
@@ -70,10 +69,8 @@ class CartController < ApplicationController
 
 
 
-
-    item = 'Hey'
-    email = params[:stripeEmail]
-    PurchaseMailer.confirm_purchase(email, item, @total).deliver_now
+    email = customer.email
+    PurchaseMailer.confirm_purchase(email, @total).deliver_now
 
 
     order = Order.create(
@@ -92,7 +89,7 @@ class CartController < ApplicationController
 
     session.delete(:cart)
 
-    redirect_to root_path
+    redirect_to root_path, notice: "Congratulations on your purchase, your card has been charged #{view_context.number_to_currency(@total.to_d / 100)}"
 
   rescue Stripe::CardError => e
     flash[:error] = e.message

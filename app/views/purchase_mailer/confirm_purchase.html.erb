@@ -1,5 +1,4 @@
-<h1>Purchase#confirm_purchase</h1>
+<h1>New Purchase Order Placed</h1>
 
-<p>
-  <%= @greeting %>, find me in app/views/purchase_mailer/confirm_purchase.html.erb
-</p>
+<p>New order placed for a total of <%= number_to_currency(@total.to_d / 100) %>.</p>
+<p>Please log into admin for further details.</p>

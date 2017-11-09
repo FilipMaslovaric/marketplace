@@ -1,3 +1,4 @@
-Purchase#confirm_purchase
+New Purchase Order Placed
 
-<%= @greeting %>, find me in app/views/purchase_mailer/confirm_purchase.text.erb
+New order placed for a total of <%= number_to_currency(@total.to_d / 100) %>.
+Please log into admin for further details.
