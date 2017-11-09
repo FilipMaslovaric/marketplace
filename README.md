@@ -37,16 +37,16 @@ Link : [https://digitalmarketplace.herokuapp.com/](https://digitalmarketplace.he
 
 
 ---
-## 3. Wireframing and workflow diagram
+## 3. Wireframing
 ![wireframe](public/readme_images/wireframe.png?raw=true)
 
 ---
 ## 4. User Stories
+![wireframe](public/readme_images/userstories.png?raw=true)
+Link: [https://trello.com/b/6RHt5sse/marketplace/](https://trello.com/b/6RHt5sse/marketplace) 
 
 ---
 ## 5. Entity relationship diagram / DB Schema
-
-
 ![ERD](public/readme_images/erd.png?raw=true)
 
 ---
