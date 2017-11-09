@@ -5,46 +5,65 @@
     <% if @products.any? %>
       <div class="ui grid">
         <div class="doubling four column row">
-        <% @products.each do |product| %>
-          <div class="column buffer"> 
-            <div class="ui link cards">
-              <div class="card">
-                <div class="ui fluid image">
-                  <% if product.image == 0 %>
-                    <%= image_tag product.image = root_path << "placeholder_images/pillow.jpg", class: "img-responsive" %>
-                  <% else %>
-                    <%= image_tag product.image = Media.find(product.image).file_name.url, class: "img-responsive" %>
-                  <% end %>
-                </div>
-                <div class="content">
-                  <div class="header"><%= product.name %></div>
-                  <div class="meta">
-                    <a><%= product.category.name %></a>
+
+          <% @products.each do |product| %>
+
+            <div class="column buffer"> 
+              <div class="ui special cards">
+                <div class="card">
+
+                  <div class="blurring dimmable image">
+                    <div class="ui dimmer">
+                      <div class="content">
+                        <div class="center">
+                          <%= link_to 'View Product', product, class: "ui inverted button" %>
+                        </div>
+                      </div>
+                    </div>
+                    <% if product.image == 0 %>
+                      <%= image_tag product.image = root_path << "placeholder_images/pillow.jpg", class: "img-responsive" %>
+                    <% else %>
+                      <%= image_tag product.image = Media.find(product.image).file_name.url, class: "img-responsive" %>
+                    <% end %>
                   </div>
-                  <div class="description">
-                    <%= product.about %>
+
+                  <div class="content">
+                    
+                    <div class="header"><%= product.name %></div>
+                    
+                    <div class="meta">
+                      <%= product.category.name %>
+                    </div>
+
+                    <div class="description">
+                      <%= product.about %>
+                    </div>
+
                   </div>
-                </div>
-                <div class="extra content">
-                  <div class="ui right floated">
-                    <%= link_to 'View Product', product, class: "ui button" %>
+
+                  <div class="extra content">
+
+                    <div class="header">
+                      <%= number_to_currency(product.price.to_d / 100) %>
+                    </div>
+
                   </div>
-                  <span>
-                    <%= number_to_currency(product.price.to_d / 100) %>
-                  </span>
+
                 </div>
               </div>
             </div>
-          </div>
-        <% end %>
+
+          <% end %>
+
         </div>
       </div>
 
-        <% if @products.blank? %>
-          <h3>There are no products matching your query! Please try again!</h3>
-        <% end %>
-      </div>
     <% end %>
+
+    <% if @products.blank? %>
+      <h3>There are no products matching your query! Please try again!</h3>
+    <% end %>
+
   </div>
 </div>
 

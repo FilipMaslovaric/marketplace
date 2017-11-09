@@ -1,50 +1,49 @@
 
 
 <div class="ui container">
-
-
-  <div class="ui raised horizontal segments">
-    
-    <div <% if current_user == @product.shop.user %> id="product-image-dropzone" <% end %> class="ui padded segment">
-      <%= image_tag @image, class: "ui large image" %>
-    </div>
-  
-    <div class="ui padded segment">
-      <div class="header">
-        Shop: <%= link_to @product.shop.name, @product.shop %>
+  <div class="buffer"></div>
+  <div class="ui raised segment">
+  <div class="ui divided items">
+    <div class="item">
+      <div class="image">
+        <div <% if current_user == @product.shop.user %> id="product-image-dropzone" <% end %> >
+          <%= image_tag @image, class: "ui image" %>
+        </div>
       </div>
-      <div class="ui segment">
       <div class="content">
-        <div class="header">
-          <%= @product.name %>
+        <div class="header"><%= @product.name %></div>
+        <div class="ui right floated">
+          <div class="header">
+            <%= link_to @product.shop.name, @product.shop %>
+          </div>
         </div>
         <div class="meta">
-          <%= @product.category.name %>
+          <span class="cinema"><%= @product.category.name %></span>
         </div>
-        <div class="description <% if current_user == @product.shop.user %> editable <% end %> ">
-          <%= @product.description.html_safe %>
+        <div class="description">
+          <p><%= @product.description.html_safe %></p>
         </div>
-
-        <div class="extra content">
-          <%= number_to_currency(@product.price.to_d / 100) %>
-          
-          <div class="ui">
-            
+        <div class="extra">
+          <div class="ui right floated">
             <%= form_with url: '/cart/add' do |form| %>
               <%= form.hidden_field(:product_id, value: @product.id) %>
               <div class="button-buffer">
                 <%= form.label :quantity, 'QTY:' %>
                 <%= form.select :quantity, options_for_select(@quantity), class: "ui button" %>
-                <%= form.submit 'Add To Cart', class: "ui button" %>
+                <%= button_tag(type: 'submit', class: "ui blue labeled submit icon button") do %>
+                 <i class="right chevron icon"></i> Add To Cart
+                 <% end %>
               </div>
             <% end %>
             
-
           </div>
+          <div class="ui label"><%= number_to_currency(@product.price.to_d / 100) %></div>
 
         </div>
       </div>
+      </div>
     </div>
+
 
         <% if @product.shop.user == current_user %>
           
