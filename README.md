@@ -12,7 +12,7 @@
 ---
 ## 1. App brief for MarketPlace
 
-Enter text here
+Creating a website to promote your brand and sell your products can be difficult without any coding experience. There are many options for a business to sell their products however they can be costly and hard to set up. MarketPlace focuses on user experience and affordability to provide an online market place for a business to sell their products and promote their brand. MarketPlace provides a simple user interface where a website is created once  user signs up, and to start selling all the user is required to do is simply click a button and follow some simple steps to create a payment account through stripe to start earning money. MarketPlace not only focuses on the user experience for a seller but also a buyer, by not requiring to create an account to buy product and also having the ability to purchase products from multiple shop in one transaction MarketPlace creates a desirable user experience for all parties involved.
 
 Link : [https://digitalmarketplace.herokuapp.com/](https://digitalmarketplace.herokuapp.com/)
 
@@ -38,6 +38,7 @@ Link : [https://digitalmarketplace.herokuapp.com/](https://digitalmarketplace.he
 
 ---
 ## 3. Wireframing and workflow diagram
+![wireframe](public/readme_images/wireframe.png?raw=true)
 
 ---
 ## 4. User Stories
